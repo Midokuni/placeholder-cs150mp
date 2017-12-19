@@ -7,8 +7,7 @@
 
 <declaration-specifier> ::= <type-specifier>
 
-<type-specifier> ::= void
-                   | char
+<type-specifier> ::= char
                    | int
                    | float
 
@@ -23,7 +22,6 @@
 <constant-expression> ::= <conditional-expression>
 
 <conditional-expression> ::= <logical-or-expression>
-                           | <logical-or-expression> ? <expression> : <conditional-expression>
 
 <logical-or-expression> ::= <logical-and-expression>
                           | <logical-or-expression> || <logical-and-expression>
@@ -136,4 +134,4 @@
 
 <iteration-statement> ::= while ( <expression> ) <statement>
 
-<jump-statement> ::= return {<expression>}? ;
+<jump-statement> ::= return <expression> ;
