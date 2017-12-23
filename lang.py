@@ -58,13 +58,13 @@ t_ELSE = "else"
 t_WHILE = "while"
 t_RETURN = "return"
 t_VARIABLE = r'[a-zA-Z_][a-zA-Z0-9_]*'
-
+t_NUMBER = r'[0-9]+([\.][0-9]+)?'
 
 # A regular expression rule with some action code
-def t_NUMBER(t):
-    r'\d+'
-    t.value = int(t.value)
-    return t
+# def t_NUMBER(t):
+#     r'\d+'
+#     t.value = int(t.value)
+#     return t
 
 # Define a rule so we can track line numbers
 def t_newline(t):
@@ -87,7 +87,7 @@ lexer = lex.lex()
 
 # Test it out
 data = '''
-if (app_le <= 14){
+if (app_le <= 14.34){
   14 = 13
 }
 '''
