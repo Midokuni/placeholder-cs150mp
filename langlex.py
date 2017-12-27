@@ -12,7 +12,7 @@ reserved = {
 }
 
 # List of token names.   This is always required
-tokens = ['QUOTE','NUMBER','ADD','SUB','MUL','DIV','LPAREN','RPAREN','POWER','LBRACKET','RBRACKET','MOD','EQUAL','NOT_EQUAL','LESS','GREATER','LESS_EQUAL','GREATER_EQUAL','NOT','LBRACE','RBRACE','ASSIGN','VARIABLE','COLON'] + list(reserved.values())
+tokens = ['DELIMIT','STRING','QUOTE','NUMBER','ADD','SUB','MUL','DIV','LPAREN','RPAREN','POWER','LBRACKET','RBRACKET','MOD','EQUAL','NOT_EQUAL','LESS','GREATER','LESS_EQUAL','GREATER_EQUAL','NOT','LBRACE','RBRACE','ASSIGN','VARIABLE','COLON'] + list(reserved.values())
 
 # Regular expression rules for simple tokens
 t_ADD    = r'\+'
@@ -38,6 +38,7 @@ t_ASSIGN = r'\='
 t_COLON = r':'
 t_NUMBER = r'[0-9]+([\.][0-9]+)?'
 t_QUOTE = r'\"'
+t_DELIMIT = r'\n'
 
 # A regular expression rule with some action code
 # def t_NUMBER(t):
@@ -46,15 +47,18 @@ t_QUOTE = r'\"'
 #     return t
 
 # Define a rule so we can track line numbers
-def t_newline(t):
-    r'\n+'
-    t.lexer.lineno += len(t.value)
+# def t_newline(t):
+#     r'\n+'
+#     t.lexer.lineno += len(t.value)
+#     return t
 
 def t_VARIABLE(t):
   r'[a-zA-Z_][a-zA-Z0-9_]*'
   t.type = reserved.get(t.value,'VARIABLE')
   return t
-
+def t_STRING(t):
+  r'"(\.|[^\"])*"'
+  return t
 
 # A string containing ignored characters (spaces and tabs)
 t_ignore  = ' \t'
@@ -70,11 +74,12 @@ lexer = lex.lex()
 # Test it out
 data = '''
 test = 0
-
-while (test < 10):
-  println("Hello world")
+while (test < 10){
+  if (test % 2 == 0){
+    println("Hello world")
+  }
   test = test + 1
-
+}
 println(test)
 '''
 
