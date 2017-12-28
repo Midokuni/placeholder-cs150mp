@@ -99,31 +99,30 @@ def p_unaryexpression(p):
 		p[0] = p[1]
 
 def p_postfixexpression(p):
-	'''postfixexpression : primaryexpression
-					   	 | postfixexpression LBRACKET expression RBRACKET
-					   	 | postfixexpression LPAREN assignmentrep RPAREN'''
+	'''postfixexpression : primaryexpression'''
+#					   	 | postfixexpression LBRACKET expression RBRACKET
+#					   	 | postfixexpression LPAREN assignmentrep RPAREN'''
 	if (len(p) == 2):
 		p[0] = p[1]
 
-def p_assignmentrep(p):
-	'''assignmentrep : 
-					 | assignmentrep assignment'''
-	if (len(p) == 2):
-		p[0] = p[1]
+# def p_assignmentrep(p):
+# 	'''assignmentrep : 
+#					 | assignmentrep assignment'''
 
 def p_primaryexpression(p):
 	'''primaryexpression : VARIABLE
-						 | NUMBER
+						 | FLOAT
+						 | INT
 						 | STRING
 						 | LPAREN expression RPAREN'''
 
-def p_expression(p):
-	'''expression : assignmentexpression
-				  | expression COMMA assignmentexpression'''
+# def p_expression(p):
+# 	'''expression : assignmentexpression
+# 				  | expression COMMA assignmentexpression'''
 
-def p_assignmentexpression(p):
-	'''assignmentexpression : conditionalexpression
-							| unaryexpression ASSIGN assignmentexpression'''
+# def p_assignmentexpression(p):
+# 	'''assignmentexpression : conditionalexpression
+# 							| unaryexpression ASSIGN assignmentexpression'''
 
 
 
