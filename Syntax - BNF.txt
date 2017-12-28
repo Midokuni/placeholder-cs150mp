@@ -58,7 +58,6 @@
                               | <multiplicative-expression> % <unary-expression>
 
 <unary-expression> ::= <postfix-expression>
-                     | <unary-operator> <cast-expression>
                      | sizeof <unary-expression>
                      | sizeof <type-name>
 
