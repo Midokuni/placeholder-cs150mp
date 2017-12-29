@@ -12,7 +12,7 @@ reserved = {
 }
 
 # List of token names.   This is always required
-tokens = ['DELIMIT','STRING','QUOTE','INT','FLOAT','ADD','SUB','MUL','DIV','LPAREN','RPAREN','POWER','LBRACKET','RBRACKET','MOD','EQUAL','NOT_EQUAL','LESS','GREATER','LESS_EQUAL','GREATER_EQUAL','NOT','LBRACE','RBRACE','ASSIGN','VARIABLE','COLON'] + list(reserved.values())
+tokens = ['OR','AND', 'DELIMIT','STRING','QUOTE','INT','FLOAT','ADD','SUB','MUL','DIV','LPAREN','RPAREN','POWER','LBRACKET','RBRACKET','MOD','EQUAL','NOT_EQUAL','LESS','GREATER','LESS_EQUAL','GREATER_EQUAL','NOT','LBRACE','RBRACE','ASSIGN','VARIABLE','COLON'] + list(reserved.values())
 
 # Regular expression rules for simple tokens
 t_ADD    = r'\+'
@@ -38,6 +38,8 @@ t_ASSIGN = r'\='
 t_COLON = r':'
 #t_NUMBER = r'[0-9]+([\.][0-9]+)?'
 t_QUOTE = r'\"'
+t_OR = r'\|\|'
+t_AND = r'\&\&'
 #t_DELIMIT = r'\n'
 
 # A regular expression rule with some action code
@@ -47,7 +49,7 @@ def t_FLOAT(t):
   return t
 
 def t_INT(t):
-  r'\d'
+  r'\d+'
   t.value = int(t.value)
   return t
 
@@ -79,26 +81,19 @@ def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
 
-# Build the lexer
+# # Build the lexer
 lexer = lex.lex()
 
-# Test it out
+# #Test it out
 # data = '''
-# test = 0
-# while (test < 10){
-#   if (test % 2.5 == 0){
-#     println("Hello world")
-#   }
-#   test = test + 1
-# }
-# println(test)
+# if (13 < 14)
 # '''
 
-# Give the lexer some input
-#lexer.input(data)
+# #Give the lexer some input
+# lexer.input(data)
 
-# Tokenize
-#while True:
+# #Tokenize
+# while True:
 #    tok = lexer.token()
 #    if not tok:
 #        break      # No more input
