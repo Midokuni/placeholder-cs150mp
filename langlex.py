@@ -38,7 +38,7 @@ t_ASSIGN = r'\='
 t_COLON = r':'
 #t_NUMBER = r'[0-9]+([\.][0-9]+)?'
 t_QUOTE = r'\"'
-t_DELIMIT = r'\n'
+#t_DELIMIT = r'\n'
 
 # A regular expression rule with some action code
 def t_FLOAT(t):
@@ -56,6 +56,11 @@ def t_INT(t):
 #     r'\n+'
 #     t.lexer.lineno += len(t.value)
 #     return t
+
+def t_DELIMIT(t):
+    r'\n'
+    t.lexer.lineno += 1
+    return t
 
 def t_VARIABLE(t):
   r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -78,23 +83,23 @@ def t_error(t):
 lexer = lex.lex()
 
 # Test it out
-data = '''
-test = 0
-while (test < 10){
-  if (test % 2.5 == 0){
-    println("Hello world")
-  }
-  test = test + 1
-}
-println(test)
-'''
+# data = '''
+# test = 0
+# while (test < 10){
+#   if (test % 2.5 == 0){
+#     println("Hello world")
+#   }
+#   test = test + 1
+# }
+# println(test)
+# '''
 
 # Give the lexer some input
-lexer.input(data)
+#lexer.input(data)
 
 # Tokenize
-while True:
-    tok = lexer.token()
-    if not tok: 
-        break      # No more input
-    print(tok)
+#while True:
+#    tok = lexer.token()
+#    if not tok:
+#        break      # No more input
+#    print(tok)
