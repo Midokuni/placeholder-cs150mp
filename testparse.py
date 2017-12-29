@@ -14,14 +14,78 @@ def p_statement(p):
 
 def p_conditional(p):
 	'''conditional : additive 
-				   | IF LPAREN literal LESS literal RPAREN'''
+				   | IF LPAREN logicalor RPAREN'''
+	p[0] = p[1]
+
+def p_logicalor(p):
+	'''logicalor : logicaland
+				 | logicalor OR logicaland'''
 	if (len(p) == 2):
 		p[0] = p[1]
 	else:
-		if (p[3] < p[5]):
-			print("LESS\n")
+		if(p[1] or p[3]):
+			print("TRUE")
 		else:
-			print("GREATER\n")
+			print("FALSE")
+
+def p_logicaland(p):
+	'''logicaland : equality
+				 | logicaland OR equality'''
+	if (len(p) == 2):
+		p[0] = p[1]
+	else:
+		if(p[1] and p[3]):
+			print("TRUE")
+		else:
+			print("FALSE")
+
+def p_equality(p):
+	'''equality : relational
+				| equality EQUAL relational
+				| equality NOT_EQUAL relational'''
+	if (len(p) == 2):
+		p[0] = p[1]
+	else:
+		if (p[2] == "=="):
+			if(p[1] == p[3]):
+				print("TRUE")
+			else:
+				print("FALSE")	
+		elif (p[2] == "!="):
+			if(p[1] != p[3]):
+				print("TRUE")
+			else:
+				print("FALSE")
+
+def p_relational(p):
+	'''relational : additive 
+				   | relational LESS additive
+				   | relational GREATER additive
+				   | relational LESS_EQUAL additive
+				   | relational GREATER_EQUAL additive'''
+	if (len(p) == 2):
+		p[0] = p[1]
+	else:
+		if (p[2] == '<'):
+			if (p[1] < p[3]):
+				print("LESS")
+			else:
+				print("GREATER")
+		elif (p[2] == '>'):
+			if (p[1] > p[3]):
+				print("GREATER")
+			else:
+				print("LESS")
+		elif (p[2] == "<="):
+			if (p[1] <= p[3]):
+				print("LESS OR EQUAL")
+			else:
+				print("GREATER")
+		elif (p[2] == ">="):
+			if (p[1] >= p[3]):
+				print("GREATER OR EQUAL")
+			else:
+				print("LESS")
 
 def p_additive(p):
 	'''additive : multiplicative
