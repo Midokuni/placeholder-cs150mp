@@ -12,7 +12,7 @@ reserved = {
 }
 
 # List of token names.   This is always required
-tokens = ['OR','AND', 'DELIMIT','STRING','QUOTE','INT','FLOAT','ADD','SUB','MUL','DIV','LPAREN','RPAREN','POWER','LBRACKET','RBRACKET','MOD','EQUAL','NOT_EQUAL','LESS','GREATER','LESS_EQUAL','GREATER_EQUAL','NOT','LBRACE','RBRACE','ASSIGN','VARIABLE','COLON'] + list(reserved.values())
+tokens = ['COMMA', 'OR','AND', 'XOR', 'DELIMIT','STRING','QUOTE','INT','FLOAT','ADD','SUB','MUL','DIV','LPAREN','RPAREN','POWER','LBRACKET','RBRACKET','MOD','EQUAL','NOT_EQUAL','LESS','GREATER','LESS_EQUAL','GREATER_EQUAL','NOT','LBRACE','RBRACE','ASSIGN','VARIABLE','COLON'] + list(reserved.values())
 
 # Regular expression rules for simple tokens
 t_ADD    = r'\+'
@@ -21,7 +21,7 @@ t_MUL  = r'\*'
 t_DIV  = r'/'
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
-t_POWER   = r'\^'
+t_POWER   = r'\*\*'
 t_LBRACKET= r'\['
 t_RBRACKET= r'\]'
 t_MOD     = r'\%'
@@ -40,8 +40,9 @@ t_COLON = r':'
 t_QUOTE = r'\"'
 t_OR = r'\|\|'
 t_AND = r'\&\&'
+t_XOR = r'\^'
 #t_DELIMIT = r'\n'
-
+t_COMMA = r'\,'
 # A regular expression rule with some action code
 def t_FLOAT(t):
   r'\d+.\d+'
